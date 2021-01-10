@@ -472,4 +472,53 @@ class Queen(Piece):
 class Rook(Piece):
     img=5
     def valid_moves(self,board):
-        pass
+        i= self.row
+        j=self.col
+
+        moves=[]
+
+        #up
+        for a in range(i-1,-1,-1):
+            p=board[a][j]
+            if p==0:
+                moves.append((j,a))
+            elif p.color !=self.color:
+                moves.append((j,a))
+                break
+            else:
+                break
+        
+        #down
+        for a in range(i+1,8,1):
+            p=board[a][j]
+            if p==0:
+                moves.append((j,a))
+            elif p.color!= self.color:
+                moves.append((j,a))
+                break
+            else:
+                break
+
+        #left 
+        for a in range(j-1,-1,-1):
+            p=board[i][a]
+            if p==0:
+                moves.append((a,i))
+            elif p.color!= self.color:
+                moves.append((a,i))
+                break
+            else:
+                break
+        
+        #right
+        for a in range(j+1,8,1):
+            p=board[i][a]
+            if p==0:
+                moves.append((a,i))
+            elif p.color!= self.color:
+                moves.append((a,i))
+                break
+            else:
+                break
+        
+        return moves

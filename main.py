@@ -8,6 +8,7 @@ pygame.display.set_caption("Chess")
 clock=pygame.time.Clock()
 
 def main():
+    
     run=True
     clock.tick(FPS)
     board=Board()

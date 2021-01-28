@@ -1,6 +1,9 @@
-# chess-game
-package-pygame
+# chess-game:
 does not support en-passant and castling rule of chess
 
-#start
-run main.py file
+# Required:
+-python 3.0
+-pygame
+
+# start:
+-run main.py file

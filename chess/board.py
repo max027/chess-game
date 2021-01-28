@@ -61,8 +61,41 @@ class Board():
                 self.turn="w"
                 self.winner=None
                 self.last=None
+
         def update_moves(self):
                 for i in range(self.row):
                         for j in range(self.col):
                                 if self.board[i][j]!=0:
                                         self.board[i][j].update_valid_moves(self.board)
+
+        def draw(self,win,color):
+                if self.last and color==self.turn:
+                        y,x=self.last[0]
+                        y1,x1=self.last[1]
+
+                        xx = (4 - x) +round(self.startX + (x * self.rect[2] / 8))
+                        yy = 3 + round(self.startY + (y * self.rect[3] / 8))
+                        pygame.draw.circle(win, (0,0,255), (xx+32, yy+30), 34, 4)
+                        xx1 = (4 - x) + round(self.startX + (x1 * self.rect[2] / 8))
+                        yy1 = 3+ round(self.startY + (y1 * self.rect[3] / 8))
+                        pygame.draw.circle(win, (0, 0, 255), (xx1 + 32, yy1 + 30), 34, 4)
+
+                s=None
+                for i in range(self.row):
+                        for j in range(self.col):
+                                if self.board[i][j]!=0:
+                                        self.board[i][j].draw(win,color)
+                                        if self.board[i][j].isSelected:
+                                                s=(i,j) 
+
+        def danger_moves(self,color):
+                danger_move=[]
+                for i in range(self.row):
+                        for j in range(self.col):
+                                if self.board[i][j]!=0:
+                                        if self.board[i][j].color!=color:
+                                                for move in self.board[i][j].moves:
+                                                        danger_move.append(move)
+                return danger_move
+        
+        

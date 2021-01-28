@@ -22,3 +22,5 @@ w_knight = pygame.image.load("/home/saurabh/programming/python_file/chess_game/c
 w_pawn = pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/white_pawn.png")
 w_queen = pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/white_queen.png")
 w_rook = pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/white_rook.png")
+
+board=pygame.transform.scale(pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/board.png"),(800,800))

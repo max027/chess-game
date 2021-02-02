@@ -152,3 +152,30 @@ class Board():
                                                                        if self.board[row][j] != 0:
                                                                         castle = False
 
+                                                                if castle:
+                                                                     changed = self.move(prev, (row, 3), color)
+                                                                     changed = self.move((row,col), (row, 2), color)
+                                                                if not changed:
+                                                                     self.board[row][col].selected = True
+
+                                                      else:
+                                                                for j in range(col+1,prev[1]):
+                                                                    if self.board[row][j] != 0:
+                                                                        castle = False
+                                                                
+                                                                if castle:
+                                                                        changed = self.move(prev, (row, 6), color)
+                                                                        changed = self.move((row,col), (row, 5), color)
+                                                                if not changed:
+                                                                        self.board[row][col].selected = True
+
+                                                else:
+                                                        self.board[row][col].selected = True
+                        if changed:
+
+                                if self.turn == "w":
+                                     self.turn = "b"
+                                     self.reset_selected()
+                                else:
+                                     self.turn = "w"
+                                     self.reset_selected()

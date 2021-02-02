@@ -1,10 +1,10 @@
 import pygame
-from piece import Bishop
-from piece import king
-from piece import Knight
-from piece import Pawn
-from piece import Queen
-from piece import Rook 
+from .piece import Bishop
+from .piece import king
+from .piece import Knight
+from .piece import Pawn
+from .piece import Queen
+from .piece import Rook 
 from .constant import *
 
 class Board():
@@ -99,3 +99,56 @@ class Board():
                 return danger_move
         
         
+        def is_checked(self,color):
+                self.update_moves()
+                danger_move=self.danger_moves(color)
+                king_pos=(-1,-1)
+                for i in range(self.row):
+                        for j in range(self.col):
+                                if self.board[i][j]!=0:
+                                        king_pos=(j,i)
+                
+                if king_pos in danger_move:
+                        
+                        return True
+                
+                return False
+        
+        def select(self,col,row,color):
+                changed=False
+                prev=(-1,-1)
+                for i in range(self.row):
+                        for j in range(self.col):
+                                if self.board[i][j]!=0:
+                                        if self.board[i][j].selected:
+                                                prev=(i,j)
+                
+                if self.board[row][col]==0 and prev !=(-1,-1):
+                        piece_moves=self.board[prev[0]][prev[1]].moves
+                        if (col,row) in piece_moves:
+                                changed=self.move(prev,(row,col),color)
+                else:
+                        if prev == (-1,-1):
+                              self.reset_selected()
+                              if self.board[row][col] != 0:
+                                     self.board[row][col].selected = True
+
+                        else:
+                                if self.board[prev[0]][prev[1]].color != self.board[row][col].color:
+                                        moves = self.board[prev[0]][prev[1]].moves
+                                        if (col, row) in piece_moves:
+                                                changed = self.move(prev, (row, col), color)
+                                        if self.board[row][col].color == color:
+                                                self.board[row][col].selected = True       
+
+                                else:
+                                        if self.board[row][col].color == color:
+                                                #castling
+                                                self.reset_selected()
+                                                if self.board[prev[0]][prev[1]].moved == False and self.board[prev[0]][prev[1]].rook and self.board[row][col].king and col != prev[1] and prev!=(-1,-1):
+                                                      castle = True     
+                                                      if prev[1] < col:
+                                                                for j in range(prev[1]+1, col):
+                                                                       if self.board[row][j] != 0:
+                                                                        castle = False
+

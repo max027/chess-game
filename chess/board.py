@@ -179,3 +179,7 @@ class Board():
                                 else:
                                      self.turn = "w"
                                      self.reset_selected()
+
+        def move(self, prev, param, color):
+
+                pass

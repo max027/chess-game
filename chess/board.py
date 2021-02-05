@@ -218,7 +218,7 @@ class Board():
                 else:
                         self.reset_selected()
                 self.update_moves()
-                
+                """
                 if changed:
                         self.last=[start,end]
                         if self.turn=="w":
@@ -226,6 +226,7 @@ class Board():
                         else:
                                 self.storedTime2 += (time.time() - self.startTime)
                         self.startTime = time.time()
+                """
                 return changed
 
 

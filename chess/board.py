@@ -5,6 +5,7 @@ from .piece import Knight
 from .piece import Pawn
 from .piece import Queen
 from .piece import Rook 
+import time
 from .constant import *
 
 class Board():
@@ -16,6 +17,7 @@ class Board():
                 self.col=col
                 self.ready=False
                 self.board=[[0 for i in range(8)] for _ in range(row)]
+                self.starttime=time.time()
 
                 self.board[0][0]=Rook(0,0,"b")
                 self.board[0][1]=Knight(0,1,"b")
@@ -61,6 +63,8 @@ class Board():
                 self.turn="w"
                 self.winner=None
                 self.last=None
+                self.storedTime1 = 0
+                self.storedTime2 = 0
 
         def update_moves(self):
                 for i in range(self.row):
@@ -180,6 +184,48 @@ class Board():
                                      self.turn = "w"
                                      self.reset_selected()
 
-        def move(self, prev, param, color):
+        def reset_selected(self):
+                for i in range(self.row):
+                        for i in range(self.col):
+                                if self.board[i][j]!=0:
+                                        self.board[i][j].selected=False
 
-                pass
+        def check_mate(self):
+                return False
+
+        def move(self,start,end,color):
+                checked_before=self.is_checked(color)
+                changed=False
+                nboard=self.board[:]
+                if nboard[start[0]][start[1]].pawn:
+                        nboard[start[0]][start[1]].first=False
+                nboard[start[0]][start[1]].change_pos((end[0], end[1]))
+                nboard[end[0]][end[1]] = nboard[start[0]][start[1]]
+                nboard[start[0]][start[1]] = 0
+                self.board = nboard
+
+                if self.is_checked(color) or (checked_before and self.is_checked(color)):
+                        changed=False
+                        nboard=self.board[:]
+                        if nboard[end[0]][end[1]].pawn:
+                                nBoard[end[0]][end[1]].first = True
+                        
+                        nboard[end[0]][end[1]].change_pos((start[0], start[1]))
+                        nboard[start[0]][start[1]] = nboard[end[0]][end[1]]
+                        nboard[end[0]][end[1]] = 0
+                        self.board = nboard
+
+                else:
+                        self.reset_selected()
+                self.update_moves()
+                
+                if changed:
+                        self.last=[start,end]
+                        if self.turn=="w":
+                                self.storedTime1 += (time.time() - self.starttime)
+                        else:
+                                self.storedTime2 += (time.time() - self.startTime)
+                        self.startTime = time.time()
+                return changed
+
+

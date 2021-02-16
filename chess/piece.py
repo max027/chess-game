@@ -12,9 +12,8 @@ W=[]
 for img in black:
     B.append(pygame.transform.scale(img,(55,55)))
 
-
 for img in white:
-    W.append(pygame.transform.scale(img,(55,55)))    
+    W.append(pygame.transform.scale(img,(55,55)))
 class Piece():
     img=-1
     rect=(113,113,525,525)

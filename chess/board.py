@@ -144,7 +144,7 @@ class Board():
                                                 changed = self.move(prev, (row, col), color)
                                         if self.board[row][col].color == color:
                                                 self.board[row][col].selected = True       
-
+#---------------------------------
                                 else:
                                         if self.board[row][col].color == color:
                                                 #castling
@@ -183,7 +183,7 @@ class Board():
                                 else:
                                      self.turn = "w"
                                      self.reset_selected()
-
+#---------------------------------
         def reset_selected(self):
                 for i in range(self.row):
                         for i in range(self.col):

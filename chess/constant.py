@@ -8,6 +8,7 @@ SQUARE_SIZE=WIDTH   //COLS
 WHITE=(244,164,96)
 BLACK=(210,105,30)
 
+chessbg=pygame.transform.scale(pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/chessbg.jpeg"),(800,800))
 
 b_bishop = pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/black_bishop.png")
 b_king = pygame.image.load("/home/saurabh/programming/python_file/chess_game/chess/images/black_king.png")
